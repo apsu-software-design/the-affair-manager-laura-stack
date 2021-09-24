@@ -124,6 +124,7 @@ function showSearchMembersMenu(em:AffairManager) : string|undefined {
  */
 function showSearchAffairsMenu(em:AffairManager) : string|undefined {
   let query:string = _promptForQuery('affair');
+  console.log("searchaffairmenu");
   return _searchListMenu('affair', em.findAffairNames(query));
 }
 
@@ -148,6 +149,7 @@ function _promptForQuery(type: string): string {
  * Will return undefiend if no item is selected
  */
 function _searchListMenu(type:string, results:string[]) : string|undefined {
+
   if(results.length > 0) {
     console.log('Results found: ');
     let resultsDisplay = '  '+(results.map((item:string, idx:number) => `${idx+1}. ${item}`).join('\n  '));
@@ -220,11 +222,11 @@ function showAddToOrganizationMenu(em:AffairManager, organizationName?:string, a
  */
 function showListAffairMembersMenu(em:AffairManager) {
   let affairName = showSearchAffairsMenu(em);
-
+  console.log('Members participating in this action:')
   let members = em.getMembers(affairName);
 
-  console.log('Members participating in this action:')
-  console.log('  '+members.join('\n  ')+'\n');
+  
+  //console.log('  '+members.join('\n  ')+'\n');
 
   readlineSync.keyInPause('(Press any letter to continue)', {guide:false}); //so have time to read stuff
 }
